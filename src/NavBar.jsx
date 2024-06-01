@@ -64,23 +64,23 @@ export default function NavBar() {
         <MobileNav open={openNav}>
           <ul className="flex flex-col items-center gap-2">
             <li>
-              <Typography as="a" href="#" variant="small" className="nav-link hover:bg-gray-200 rounded-md p-2 text-white">
+              <Typography as="a" href="#" variant="small" className="nav-link hover:bg-gray-200 rounded-md p-2 text-black">
                 Home
               </Typography>
             </li>
             <li>
-              <Typography as="a" href="#" variant="small" className="nav-link hover:bg-gray-200 rounded-md p-2 text-white">
-                About
+              <Typography as="a" href="#" variant="small" className="nav-link hover:bg-gray-200 rounded-md p-2 text-black">
+                Shop
               </Typography>
             </li>
             <li>
-              <Typography as="a" href="#" variant="small" className="nav-link hover:bg-gray-200 rounded-md p-2 text-white">
-                Services
+              <Typography as="a" href="#" variant="small" className="nav-link hover:bg-gray-200 rounded-md p-2 text-black">
+                Wishlist
               </Typography>
             </li>
             <li>
-              <Typography as="a" href="#" variant="small" className="nav-link hover:bg-gray-200 rounded-md p-2 text-white">
-                Contact
+              <Typography as="a" href="#" variant="small" className="nav-link hover:bg-gray-200 rounded-md p-2 text-black">
+                Checkout
               </Typography>
             </li>
           </ul>
