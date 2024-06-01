@@ -1,0 +1,7 @@
+/* Import Material Tailwind CSS */
+
+
+/* Other CSS rules */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
