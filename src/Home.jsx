@@ -4,10 +4,13 @@ import Hero from './Hero';
 import LogoSection6 from './LogoSection6';
 import ProductListSection4 from './ProductListCard';
 import { SimpleFooter } from './SimpleFooter';
+import NavBar from './NavBar';
 
 const Home = () => {
   return (
     <div className='Homepage'>
+        <NavBar />
+
         <Hero />
 
         <LogoSection6 />
