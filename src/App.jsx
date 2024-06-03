@@ -1,24 +1,28 @@
 import React from 'react';
 import NavBar from './NavBar';
-import Hero from './Hero';
-import LogoSection6 from './LogoSection6';
-import ProductListSection4 from './ProductListCard';
-import { SimpleFooter } from './SimpleFooter';
+import Home from './Home';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Shop from './Shop';
+import Wishlist from './Wishlist';
+import Checkout from './Checkout';
+import Login from './Login';
 
 const App = () => {
     return (
-        <div>
-            <NavBar />
-
-            <Hero />
-
-            <LogoSection6 />
-
-            <ProductListSection4 />
-
-            <SimpleFooter />
-            
-        </div>
+        <Router>
+            <div className='App'> 
+                <NavBar />
+                <div className='content'>
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/shop" element={<Shop />} />
+                        <Route path="/wishlist" element={<Wishlist />} />
+                        <Route path="/checkout" element={<Checkout />} />
+                        <Route path="/login" element={<Login />} />
+                    </Routes>
+                </div>
+            </div>
+        </Router>
     );
 };
 
