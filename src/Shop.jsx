@@ -7,7 +7,7 @@ function Shop() {
     <div>
       <NavBar />
       <main className="p-4">
-        <h1 className="text-4xl font-bold text-center">Heyyy</h1>
+        <h1 className="text-4xl font-bold text-center">This is Shop page</h1>
       </main>
     </div>
   );
