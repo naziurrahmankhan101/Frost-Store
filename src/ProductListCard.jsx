@@ -35,19 +35,19 @@ import {
   
   const CONTENTS = [
     {
-      img: "./product1.svg",
-      name: "Linen Suit",
-      price: "$2,500"
+      img: "./product_bag.svg",
+      name: "Backpack",
+      price: "$250"
     },
     {
-      img: "https://www.material-tailwind.com/image/product-3.png",
-      name: "Tweed Suit",
-      price: "$2,300"
+      img: "./product_cap.svg",
+      name: "HeadWear",
+      price: "$120"
     },
     {
-      img: "https://www.material-tailwind.com/image/product-5.png",
-      name: "Premium Suit",
-      price: "$1,240"
+      img: "./product_jacket.svg",
+      name: "Track Jacket",
+      price: "$390"
     },
   ];
   
