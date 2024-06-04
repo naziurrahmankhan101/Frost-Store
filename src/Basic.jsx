@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Typography, Input, Button } from "@material-tailwind/react";
 import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/solid";
+import { Link } from "react-router-dom"; // Import the Link component
 
 export function Basic() {
   const [passwordShown, setPasswordShown] = useState(false);
@@ -112,6 +113,11 @@ export function Basic() {
               </a>
             </Typography>
           </form>
+          <Link to="/">
+          <Button color="gray" size="lg" className="mt-6" fullWidth>
+              Go back
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
