@@ -3,12 +3,12 @@ import NavBar from './NavBar';
 import { Card, CardBody, Typography, Avatar, Button } from "@material-tailwind/react";
 
 const initialProducts = [
-  { brand: "Nike", name: "Nike Air Max", price: 120 },
-  { brand: "Nike", name: "Nike React", price: 130 },
-  { brand: "Adidas", name: "Adidas Ultraboost", price: 180 },
-  { brand: "Adidas", name: "Adidas Superstar", price: 85 },
-  { brand: "Puma", name: "Puma RS-X", price: 110 },
-  { brand: "Puma", name: "Puma Suede", price: 70 },
+  { brand: "Nike", name: "Nike Air Max", price: 120, image: "./nike-logo.svg" },
+  { brand: "Nike", name: "Nike React", price: 130, image: "./nike-logo.svg" },
+  { brand: "Adidas", name: "Adidas Ultraboost", price: 180, image: "./adidas-logo.svg" },
+  { brand: "Adidas", name: "Adidas Superstar", price: 85, image: "./adidas-logo.svg" },
+  { brand: "Puma", name: "Puma RS-X", price: 110, image: "./puma-logo.svg" },
+  { brand: "Puma", name: "Puma Suede", price: 70, image: "./puma-logo.svg" },
 ];
 
 const Wishlist = () => {
@@ -25,7 +25,7 @@ const Wishlist = () => {
       <NavBar />
       
       <div className="flex flex-col items-center justify-center bg-gray-100 py-8">
-      <h1 className="text-4xl font-bold text-center mt-8 mb-8">Your Wishlist</h1>
+        <h1 className="text-4xl font-bold text-center mt-8 mb-8">Your Wishlist</h1>
         {brands.map((brand, brandIndex) => (
           <Card key={brandIndex} className="w-full max-w-3xl mb-6">
             <CardBody>
@@ -35,13 +35,13 @@ const Wishlist = () => {
               <div className="divide-y divide-gray-200">
                 {products
                   .filter(product => product.brand === brand)
-                  .map(({ name, price }, productIndex) => (
+                  .map(({ name, price, image }, productIndex) => (
                     <div
                       key={productIndex}
                       className="flex items-center justify-between pb-3 pt-3 last:pb-0"
                     >
                       <div className="flex items-center gap-x-3">
-                        <Avatar size="lg" alt={name} />
+                        <Avatar size="lg" alt={name} src={image} />
                         <div>
                           <Typography color="blue-gray" variant="h6">
                             {name}

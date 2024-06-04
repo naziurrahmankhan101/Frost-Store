@@ -5,6 +5,7 @@ import LogoSection6 from './LogoSection6';
 import ProductListSection4 from './ProductListCard';
 import { SimpleFooter } from './SimpleFooter';
 import NavBar from './NavBar';
+import QuantityEdit from './QuantityEdit';
 
 const Home = () => {
   return (
@@ -18,8 +19,8 @@ const Home = () => {
         <ProductListSection4 />
 
         <SimpleFooter />
-        
 
+        
     </div>
   )
 }
