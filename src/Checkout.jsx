@@ -1,86 +1,93 @@
 import React from "react";
-import { Button } from "@material-tailwind/react";
 import NavBar from "./NavBar";
 
 const Checkout = () => {
-  const items = [
-    { id: 1, name: "Nike T-shirt", price: 44.00, quantity: 1, image: "./nike-logo.svg" },
-    { id: 2, name: "Adidas Boots", price: 54.00, quantity: 1, image: "./adidas-logo.svg" },
-    { id: 3, name: "Puma Football", price: 32.00, quantity: 1, image: "./puma-logo.svg" },
-  ];
-
-  const shippingCost = 5.00;
-  const totalPrice = items.reduce((acc, item) => acc + item.price * item.quantity, 0) + shippingCost;
-
   return (
-    <div className="bg-gray-100">
-      <NavBar /> {/* Ensure NavBar is at the top */}
-      <div className="container mx-auto px-4 pt-6"> {/* Add padding top to content area */}
-        <div className="w-full max-w-3xl p-8 bg-white rounded-lg shadow-md">     
-          <h1 className="text-3xl font-semibold mb-6">Checkout</h1>
-          
-          {/* Order Summary */}
-          <div className="bg-gray-200 p-4 mb-6 rounded">
-            <h2 className="text-xl font-semibold mb-4">Shopping Cart</h2>
-            <div>
-              {items.map(item => (
-                <div key={item.id} className="flex justify-between items-center mb-4">
-                  <img src={item.image} alt={item.name} className="w-16 h-16 object-cover rounded" />
-                  <div className="flex-1 mx-4">
-                    <h3 className="text-lg">{item.name}</h3>
-                    <p>€{item.price.toFixed(2)}</p>
-                  </div>
+    <section className="py-12 bg-gray-50">
+      <NavBar />
+      <div className="container mx-auto px-4">
+        <div className="flex flex-wrap -mx-4">
+          <div className="w-full lg:w-2/3 px-4 mb-12 lg:mb-0">
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden p-6">
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">Shopping Cart</h2>
+              <p className="text-sm text-gray-500 mb-6">You are eligible for Free Shipping.</p>
+              
+              <div className="border-b pb-6 mb-6">
+                <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center">
-                    <button className="px-2">-</button>
-                    <span className="mx-2">{item.quantity}</span>
-                    <button className="px-2">+</button>
+                    <img src="link-to-pink-blouse-image" alt="Pink Blouse" className="w-24 h-24 object-cover rounded-lg" />
+                    <div className="ml-4">
+                      <h4 className="text-lg font-semibold text-gray-900">Pink Blouse</h4>
+                      <p className="text-sm text-gray-500">Silk</p>
+                      <p className="text-sm text-gray-500">Size: XS</p>
+                      <p className="text-sm text-green-500">In Stock</p>
+                    </div>
                   </div>
-                  <p className="w-16 text-right">€{(item.price * item.quantity).toFixed(2)}</p>
+                  <div className="text-lg font-semibold text-gray-900">$1,300</div>
                 </div>
-              ))}
-            </div>
-            <div className="flex justify-between mt-4">
-              <span>Shipping</span>
-              <span>€{shippingCost.toFixed(2)}</span>
-            </div>
-            <div className="flex justify-between mt-2 text-lg font-bold">
-              <span>Total Price</span>
-              <span>€{totalPrice.toFixed(2)}</span>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <img src="link-to-premium-suit-image" alt="Premium Suit" className="w-24 h-24 object-cover rounded-lg" />
+                    <div className="ml-4">
+                      <h4 className="text-lg font-semibold text-gray-900">Premium Suit</h4>
+                      <p className="text-sm text-gray-500">Linen</p>
+                      <p className="text-sm text-gray-500">Size: M</p>
+                      <p className="text-sm text-green-500">In Stock</p>
+                    </div>
+                  </div>
+                  <div className="text-lg font-semibold text-gray-900">$700</div>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Billing and Shipping Information */}
-          <form className="mb-6">
-            <h2 className="text-xl font-semibold mb-4">Billing and Shipping Information</h2>
-            <div className="space-y-4">
-              <input type="text" placeholder="Full Name" className="input w-full p-2 border rounded" />
-              <input type="text" placeholder="Address" className="input w-full p-2 border rounded" />
-              <input type="text" placeholder="City" className="input w-full p-2 border rounded" />
-              <input type="text" placeholder="Postal Code" className="input w-full p-2 border rounded" />
-              <input type="text" placeholder="Country" className="input w-full p-2 border rounded" />
+          <div className="w-full lg:w-1/3 px-4">
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden p-6">
+              <h2 className="text-xl font-semibold text-gray-900 mb-6">Order Summary</h2>
+              <div className="flex justify-between text-sm text-gray-700 mb-4">
+                <span>Subtotal</span>
+                <span>$2,090</span>
+              </div>
+              <div className="flex justify-between text-sm text-gray-700 mb-4">
+                <span>Shipping Tax</span>
+                <span>$0</span>
+              </div>
+              <div className="flex justify-between items-center text-sm text-gray-700 mb-6">
+                <input
+                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  type="email"
+                  placeholder="Enter your email"
+                />
+                <button className="ml-2 bg-gray-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                  APPLY
+                </button>
+              </div>
+              <div className="flex justify-between text-xl font-semibold text-gray-900 mb-6">
+                <span>Total</span>
+                <span>$2,090</span>
+              </div>
+              <button className="w-full bg-black text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline mb-4">
+                CHECKOUT
+              </button>
+              <button className="w-full bg-gray-300 text-gray-700 font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline">
+                CONTINUE
+              </button>
+              <p className="text-xs text-gray-500 mt-4">Tax included. Shipping calculated at checkout.</p>
+              <p className="text-xs text-gray-500 mt-4">
+                <i className="fas fa-lock mr-2"></i>
+                Secured Payment by Paddle with:
+              </p>
+              <div className="mt-2 flex items-center">
+                <img src="link-to-visa-logo" alt="Visa" className="h-6 mr-2" />
+                <img src="link-to-mastercard-logo" alt="MasterCard" className="h-6 mr-2" />
+                <img src="link-to-amex-logo" alt="American Express" className="h-6 mr-2" />
+                <img src="link-to-paypal-logo" alt="PayPal" className="h-6" />
+              </div>
             </div>
-            <div className="flex justify-between mt-6">
-              <Button color="black" ripple="light">
-                Add Card
-              </Button>
-            </div>
-          </form>
-
-          {/* Order Review */}
-          <div className="bg-gray-200 p-4 mb-6 rounded">
-            <h2 className="text-xl font-semibold mb-4">Order Review</h2>
-            <p>Review your order details before placing the order.</p>
-          </div>
-
-          {/* Action buttons */}
-          <div className="flex justify-center">
-            <Button color="black" ripple="light">
-              Place Order
-            </Button>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

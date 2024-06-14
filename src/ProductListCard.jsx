@@ -70,16 +70,13 @@ export function ProductListSection4() {
   return (
     <section className="py-24 px-8">
       <div className="mx-auto text-center mb-16">
-        <Typography className="font-medium text-lg">
-          Tailored Product Search
-        </Typography>
+        
         <Typography variant="h1" className="my-4 text-4xl">
-          Find What You Need
+          Our Featured Products
         </Typography>
         <Typography className="!font-normal text-gray-500 mx-auto max-w-2xl">
-          Simplify your shopping experience with our intuitive filter system.
-          Whether you&apos;re looking for specific features, price ranges, or
-          brands.
+          Look at the best sports gear by the world's leading brands. Get your hands on this amazing
+          products with just a few clicks away!
         </Typography>
       </div>
       <div className="mx-auto container">
