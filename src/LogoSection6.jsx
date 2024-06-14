@@ -41,7 +41,7 @@ export function LogoSection6() {
             <Card shadow={false} className="bg-[#FAFAFA] px-10">
               <CardBody>
                 <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/8/88/Puma-Logo.png"
+                  src="https://upload.wikimedia.org/wikipedia/fr/4/49/Puma_AG.svg"
                   alt="logo"
                   className="w-40"
                 />

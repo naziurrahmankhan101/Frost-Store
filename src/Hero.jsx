@@ -4,7 +4,7 @@ import { Carousel } from "@material-tailwind/react";
 
 const Hero = () => {
     return (
-    <div className="flex justify-center items-center h-300 bg-white">
+      <div className="flex justify-center items-center bg-white custom-height">
       <Carousel
         className="max-w-screen-xl"
         navigation={({ setActiveIndex, activeIndex, length }) => (
