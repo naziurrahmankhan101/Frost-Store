@@ -1,10 +1,11 @@
 
 import React from 'react';
-import Hero from './Hero';
+
 import LogoSection6 from './LogoSection6';
 import ProductListSection4 from './ProductListCard';
 import { SimpleFooter } from './SimpleFooter';
 import NavBar from './NavBar';
+import { FeaturedImageGallery } from './Gallery';
 
 
 const Home = () => {
@@ -12,11 +13,13 @@ const Home = () => {
     <div className='Homepage'>
         <NavBar />
 
-        <Hero />
+        <FeaturedImageGallery />
+
+        
+        <ProductListSection4 />
 
         <LogoSection6 />
 
-        <ProductListSection4 />
 
         <SimpleFooter />
 
