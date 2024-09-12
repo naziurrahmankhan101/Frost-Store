@@ -27,11 +27,7 @@ const client = new MongoClient(uri, {
 
 async function run() {
     try {
-<<<<<<< HEAD
         // Connect the client to the server	(optional starting in v4.7)
-=======
-        // Connect the client to the server  (optional starting in v4.7)
->>>>>>> 4fc6c2eb0dd4b0b98fb50b371352d89bf14d87fa
         await client.connect();
         // Send a ping to confirm a successful connection
         const bookCollections = client.db("BookInventory").collection("Books");
