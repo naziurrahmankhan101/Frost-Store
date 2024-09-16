@@ -1,117 +1,62 @@
+import React, { useState, useEffect } from 'react';
 import {
   Card,
   CardBody,
-  Navbar,
   Typography,
-} from "@material-tailwind/react";
-import NavBar from "./NavBar";
+  Button,
+} from '@material-tailwind/react';
+import NavBar from './NavBar';
 
-export function ProductListCard({ img, name, price }) {
+const Wishlist = () => {
+  const [wishlist, setWishlist] = useState([]);
+
+  // Load wishlist from local storage when the component mounts
+  useEffect(() => {
+    const storedWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+    setWishlist(storedWishlist);
+  }, []);
+
+  // Handle remove from wishlist
+  const handleRemoveFromWishlist = (productId) => {
+    const updatedWishlist = wishlist.filter(product => product.id !== productId);
+    setWishlist(updatedWishlist); // Update state
+    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist)); // Update local storage
+  };
+
   return (
-    
-    
-      
-    <Card shadow={false} className="border border-gray-300">
-      <CardBody className="pb-0">
-        <img src={img} alt={img} className="min-w-[280px] w-full" />
-        <div className="flex justify-between">
-          <div>
-            <Typography className="mb-2" color="blue-gray" variant="h5">
-              {name}
-            </Typography>
-            <div className="mb-5 flex items-center gap-2">
-              <div className="h-5 w-5 rounded border border-gray-900 bg-brown-300 "></div>
-              <div className="h-5 w-5 rounded border border-blue-gray-100 "></div>
-              <div className="h-5 w-5 rounded border border-blue-gray-100 bg-gray-900 "></div>
-            </div>
-          </div>
-          <Typography
-            variant="h5"
-            className="text-gray-600"
-          >
-            {price}
-          </Typography>
-        </div>
-      </CardBody>
-    </Card>
-  );
-}
-
-const CONTENTS = [
-  {
-    img: "./product_bag.svg",
-    name: "Backpack",
-    price: "$250"
-  },
-  {
-    img: "./product_cap.svg",
-    name: "HeadWear",
-    price: "$120"
-  },
-  {
-    img: "./product_jacket.svg",
-    name: "Track Jacket",
-    price: "$390"
-  },
-  {
-    img: "./product_jacket.svg",
-    name: "Track Jacket",
-    price: "$390"
-  },
-  {
-    img: "./product_jacket.svg",
-    name: "Track Jacket",
-    price: "$390"
-  },
-  {
-    img: "./product_jacket.svg",
-    name: "Track Jacket",
-    price: "$390"
-  },
-];
-
-export function Wishlist() {
-  return (
-    <section className="py-24 px-8">
+    <div className="bg-white">
       <NavBar />
-      <div className="mx-auto text-center mb-16">
-       
-        <Typography variant="h1" className="my-4 text-4xl">
-          Your Wishlist
-        </Typography>
-        <Typography className="!font-normal text-gray-500 mx-auto max-w-2xl">
-        Keep Track of Your Favourite Products here
-        </Typography>
-      </div>
-      <div className="mx-auto container">
-<div className="grid grid-cols-1 gap-12 lg:grid-cols-3 md:grid-cols-2">
-  {CONTENTS.map(({ img, name, price }, index) => (
-    <div
-      key={index}
-      className="bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform hover:scale-105"
-    >
-      <img src={img} alt={name} className="w-full h-70 object-cover" />
-      <div className="p-6">
-        <h2 className="text-xl font-bold text-gray-800">{name}</h2>
-        <p className="text-gray-600 my-2">${price}</p>
-        <div className="flex justify-between items-center mt-4">
-          <button className="bg-black text-white px-24 py-2 rounded-lg shadow-md hover:bg-gray-800 transition-colors">
-            Add to Cart
-          </button>
-          <button className="text-black rounded-lg border border-black px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-              </svg>
-          </button>
-        </div>
+      <div className="max-w-screen-xl mx-auto p-8 bg-white text-gray-800">
+        <Typography variant="h1" color="gray" className="mb-8">Your Wishlist</Typography>
+        {wishlist.length === 0 ? (
+          <Typography variant="h2" color="gray" className="text-center">
+            Your wishlist is empty.
+          </Typography>
+        ) : (
+          wishlist.map(product => (
+            <Card key={product.id} className="shadow-lg mb-4">
+              <CardBody>
+                <img src={product.image} alt={product.name} className="w-full h-48 object-cover mb-4 rounded-md" />
+                <Typography variant="h2" className="mb-2">{product.name}</Typography>
+                <Typography color="gray" className="mb-1">Price: ${product.price.toFixed(2)}</Typography>
+                <Typography color="gray" className="mb-1">Brand: {product.brand}</Typography>
+                <Typography color="gray" className="mb-1">Category: {product.category}</Typography>
+                <div className="flex space-x-2 mt-4">
+                  <Button
+                    onClick={() => handleRemoveFromWishlist(product.id)}
+                    color="red"
+                    size="sm"
+                  >
+                    Remove from Wishlist
+                  </Button>
+                </div>
+              </CardBody>
+            </Card>
+          ))
+        )}
       </div>
     </div>
-  ))}
-</div>
-</div>
-
-    </section>
   );
-}
+};
 
 export default Wishlist;

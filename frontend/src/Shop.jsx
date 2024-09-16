@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Button,
   Input,
@@ -9,44 +9,84 @@ import {
   Typography,
   IconButton,
 } from '@material-tailwind/react';
+import { useNavigate } from 'react-router-dom';
 import NavBar from './NavBar';
 
-const productsData = [
-  { id: 1, name: 'Product 1', price: 50, brand: 'Adidas', category: 'Sneakers', image: 'path/to/image1.jpg' },
-  { id: 2, name: 'Product 2', price: 60, brand: 'Nike', category: 'Shoes', image: 'path/to/image2.jpg' },
-  { id: 15, name: 'Product 15', price: 30, brand: 'Puma', category: 'Jersey', image: 'path/to/image15.jpg' },
-];
-
 const ShopPage = () => {
+  const [productsData, setProductsData] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [sortOption, setSortOption] = useState('');
   const [selectedBrand, setSelectedBrand] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [cart, setCart] = useState([]);
+  const [wishlist, setWishlist] = useState([]); // Initialize wishlist
 
   const itemsPerPage = 15;
+  const navigate = useNavigate();
 
-  const handleSearch = (e) => {
-    setSearchQuery(e.target.value);
-  };
+  // Fetch products from API
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/all-books');
+        const data = await response.json();
+        const formattedData = data.map(product => ({
+          id: product.id,
+          name: product.ProductName,
+          price: parseFloat(product.ProductPrice.replace('$', '')),
+          brand: product.Brand,
+          category: product.Category,
+          image: product.imageUrl,
+          description: product.ProductDescription,
+        }));
+        setProductsData(formattedData);
+      } catch (error) {
+        console.error('Error fetching product data:', error);
+      }
+    };
+    fetchProducts();
+  }, []);
 
-  const handleSortChange = (e) => {
-    setSortOption(e);
-  };
+  // Load wishlist from local storage when the component mounts
+  useEffect(() => {
+    const storedWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+    setWishlist(storedWishlist);
+  }, []);
 
-  const handleBrandChange = (e) => {
-    setSelectedBrand(e);
-  };
-
-  const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
-  };
-
+  const handleSearch = (e) => setSearchQuery(e.target.value);
+  const handleSortChange = (e) => setSortOption(e);
+  const handleBrandChange = (e) => setSelectedBrand(e);
+  const handleCategoryChange = (category) => setSelectedCategory(category);
   const handleClearFilters = () => {
     setSearchQuery('');
     setSortOption('');
     setSelectedBrand('');
     setSelectedCategory('');
+  };
+
+  // Handle add to cart
+  const handleAddToCart = (product) => {
+    setCart([...cart, product]);
+    navigate('/checkout', { state: { product } });
+  };
+
+  // Handle add to wishlist
+  const handleAddToWishlist = (product) => {
+    const existingProduct = wishlist.find(item => item.id === product.id);
+    
+    if (!existingProduct) {
+      const updatedWishlist = [...wishlist, product];
+      setWishlist(updatedWishlist); // Update state
+      localStorage.setItem('wishlist', JSON.stringify(updatedWishlist)); // Save to local storage
+      alert(`${product.name} added to wishlist`);
+    } else {
+      alert(`${product.name} is already in the wishlist`);
+    }
+  };
+
+  const handleGoToWishlist = () => {
+    navigate('/wishlist');
   };
 
   const filteredProducts = productsData
@@ -61,17 +101,14 @@ const ShopPage = () => {
           return a.price - b.price;
         case 'priceHighToLow':
           return b.price - a.price;
-        case 'bestSeller':
-          // Add your best seller logic here
-          return 0;
         default:
           return 0;
       }
     });
 
   const paginatedProducts = filteredProducts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
-
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+
   return (
     <div className="bg-white">
       <NavBar />
@@ -95,7 +132,6 @@ const ShopPage = () => {
             <Option value="">Sort by</Option>
             <Option value="priceLowToHigh">Price: Low to High</Option>
             <Option value="priceHighToLow">Price: High to Low</Option>
-            <Option value="bestSeller">Best Seller</Option>
           </Select>
           <Select 
             value={selectedBrand} 
@@ -112,8 +148,6 @@ const ShopPage = () => {
         <div className="flex flex-wrap gap-2 mb-8">
           <Button onClick={() => handleCategoryChange('Sneakers')} variant="outlined" size="lg">Sneakers</Button>
           <Button onClick={() => handleCategoryChange('Shoes')} variant="outlined" size="lg">Shoes</Button>
-          <Button onClick={() => handleCategoryChange('Jersey')} variant="outlined" size="lg">Jersey</Button>
-          <Button onClick={() => handleCategoryChange('Gear')} variant="outlined" size="lg">Gear</Button>
           <Button onClick={handleClearFilters} color="red" size="lg">Clear Filters</Button>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
@@ -122,9 +156,14 @@ const ShopPage = () => {
               <CardBody>
                 <img src={product.image} alt={product.name} className="w-full h-48 object-cover mb-4 rounded-md" />
                 <Typography variant="h2" className="mb-2">{product.name}</Typography>
-                <Typography color="gray" className="mb-1">Price: ${product.price}</Typography>
+                <Typography color="gray" className="mb-1">Price: ${product.price.toFixed(2)}</Typography>
                 <Typography color="gray" className="mb-1">Brand: {product.brand}</Typography>
                 <Typography color="gray" className="mb-1">Category: {product.category}</Typography>
+                <Typography color="gray" className="mb-1">{product.description}</Typography>
+                <div className="flex space-x-2 mt-4">
+                  <Button onClick={() => handleAddToCart(product)} color="blue" size="sm">Add to Cart</Button>
+                  <Button onClick={() => handleAddToWishlist(product)} color="green" size="sm">Add to Wishlist</Button>
+                </div>
               </CardBody>
             </Card>
           ))}
@@ -141,6 +180,9 @@ const ShopPage = () => {
             </IconButton>
           ))}
         </div>
+        <Button onClick={handleGoToWishlist} color="purple" className="mt-8">
+          Go to Wishlist
+        </Button>
       </div>
     </div>
   );
