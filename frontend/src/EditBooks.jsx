@@ -1,5 +1,6 @@
 import React from 'react'
-import SideBar from './SideBar'
+import SideBar from './Sidebar'
+
 
 const EditBooks = () => {
   return (
@@ -8,7 +9,7 @@ const EditBooks = () => {
         <SideBar/>
       </div>
       EditBook
-    </div>
+    </div> 
   )
 }
 
